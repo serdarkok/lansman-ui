@@ -1,0 +1,22 @@
+{
+  "name": "lansman-ui",
+  "version": "1.0.0",
+  "description": "My geometric Nuxt.js project",
+  "author": "serdarkok",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "bootstrap-scss": "^4.3.1",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.3.1"
+  }
+}
