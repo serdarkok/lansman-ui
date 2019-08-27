@@ -51,6 +51,7 @@ export default {
           }
         })
         .catch(err => {
+          this.modal('Hata', 'Veritabanı bağlantısı sağlanamadı, lütfen daha sonra tekrar deneyiniz');
           console.log(err);
           // this.errors.push(err);
         });
