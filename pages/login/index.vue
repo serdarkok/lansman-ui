@@ -1,62 +1,65 @@
 <template>
   <div class="login-wrap">
-    <div class="login-box">
-      <form @submit.prevent="getLogin" method="POST">
-        <div class="form-group">
-          <label for="mail">E-Posta / Kullanıcı Adı</label>
-          <input
-            type="text"
-            v-model="mail"
-            class="form-control"
-            id="mail"
-            name="mail"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Şifre</label>
-          <input
-            type="password"
-            v-model="password"
-            class="form-control"
-            id="password"
-            name="password"
-            placeholder="Şifre"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Giriş Yap</button>
-      </form>
-    </div>
+    <el-card shadow="never">
+      <el-form @submit.native.prevent>
+        <el-form-item label="E-Posta">
+          <el-input placeholder="E-Posta Adresi" v-model="user.email"></el-input>
+        </el-form-item>
+        <el-form-item label="Şifre">
+          <el-input placeholder="Şifre" v-model="user.password" type="password"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button type="warning" size="small" native-type="submit" @click="getLogin" block plain>Giriş</el-button>
+    </el-card>
+    <nuxt-link to="/panel">Panel'e git</nuxt-link>
+      <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
   </div>
 </template>
 
 <script>
-import axios from '@nuxtjs/axios';
+import axios from "@nuxtjs/axios";
 export default {
   data() {
     return {
-      mail: "",
+      user : {
+      email: "",
       password: "",
-      errors: []
+      },
+      test : {
+        mail: 'serdar',
+        password: '1234'
+      },
     };
   },
 
   methods: {
+    deneme : function() {
+      console.log('Deneme Yazacak!!');
+    },
     getLogin() {
-        this.$axios
-        .post("http://localhost:3001/api/login", this.mail, this.password)
+      this.$axios
+        .post("/api/login/", this.user)
         .then(result => {
           console.log(result);
+          if(result.data.status === false) {
+            this.modal('Uyarı', result.data.message);
+          }
+          else {
+            this.modal('Başarılı', result.data.message);
+            localStorage.setItem('x-access-token', result.data.token);
+            this.$router.push('/panel');
+          }
         })
         .catch(err => {
-          this.errors.push(err);
+          console.log(err);
+          // this.errors.push(err);
         });
     },
-    async fetchSomething() {
-      const ip = await this.$axios.$get("http://icanhazip.com");
-      this.ip = ip;
-    }
+    modal(status, message) {
+        this.$alert(message, status, {
+          confirmButtonText: 'OK',
+        });
+      }
   }
 };
 </script>
