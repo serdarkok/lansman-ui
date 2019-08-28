@@ -1,23 +1,12 @@
-import Vuex from "vuex";
+import Vuex from 'vuex';
+import loginModule from './modules/login';
 
-const createState = () => {
-    return new Vuex.Store({
-        state: () => ({
-            counter: 0,
-        }),
-        mutations: {
-            increment (state) {
-                state.counter++;
-            }
-        },
-        actions: {
-            nuxtServerInit(vuexContext, context) {
-                console.log(vuexContext);
-            }
-        },
-        getters: {}
+const createStore = () => {
+  return new Vuex.Store({
+    modules: {
+      loginModule: loginModule,
+    }
+  });
+};
 
-    });
-}
-
-export default createState;
+export default createStore
