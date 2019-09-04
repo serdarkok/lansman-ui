@@ -2,7 +2,7 @@
     <el-container class="main-container">
         <el-row>
           <el-col>Burası login sonrası alan</el-col>
-          <el-col>{{ $store.state.counter }}</el-col>
+          <nuxt-link to="/toru">Toruya geç</nuxt-link>
         </el-row>
     </el-container>
 
@@ -10,7 +10,13 @@
 
 <script>
 export default {
-  // middleware :'authenticated',
+  middleware :'verifyUser',
+
+  computed : {
+    startLogin() {
+
+    }
+  }
 }
 </script>
 

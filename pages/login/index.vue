@@ -27,8 +27,10 @@ export default {
   },
 
   methods: {
-    moduleLogin() {
+    moduleLogin({redirect}) {
       this.$store.dispatch('loginModule/getLogin', this.user).then((result) => {
+        console.log('Burası çalıştı!!');
+        this.$router.push('/panel');
         this.modalPopup(this.$store.state.loginModule.modal.status, this.$store.state.loginModule.modal.message);
       });
     },

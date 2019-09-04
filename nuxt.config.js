@@ -68,7 +68,8 @@ export default {
   },
 
   proxy: {
-    '/api/login/': 'http://localhost:3001',
+    '/api/login/' : 'http://localhost:3001',
+    '/api/verifyToken/' : 'http://localhost:3001',
   },
   /*
   ** Build configuration
