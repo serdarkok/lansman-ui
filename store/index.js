@@ -10,9 +10,21 @@ const createStore = () => {
     actions : {
       // Buradaki action her sayfa yenilendiğinde çalışmaktadır. Middleware ile karıştırmamak gerekiyor. Linkler arasında gezinti de nuxtserverinit çalışmaz.
       async nuxtServerInit({ commit }, { req }, state) {
-         if (req.headers.cookie) {
+        // Cookie var mı diye bakıyoruz, eğer varsa parse edip içerisinde token key'ini arıyoruz.
+        if (req.headers.cookie) {
           const parsed = await cookieparser.parse(req.headers.cookie)
-          parsed.auth = true;
+          console.log('nuxtServerInit çalıştı !!');
+          // Cookie içerisinde token key'i varsa state içerisinde güncelleme yapıyoruz.
+          if(parsed.token) {
+            parsed.auth = true;
+            commit('loginModule/changeToken', parsed);
+          }
+        }
+        else {
+          const parsed = {
+            auth: false,
+            token: null
+          };
           commit('loginModule/changeToken', parsed);
         }
       },

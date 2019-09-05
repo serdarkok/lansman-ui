@@ -1,6 +1,6 @@
 import axios from '@nuxtjs/axios';
 
-export default async function ({store, redirect, app}) {
+export default async function ({store, redirect, app, router}) {
     console.log('Middleware çalıştı');
   if (store.state.loginModule.user.token) {
     const _data = store.state.loginModule.user;
@@ -9,7 +9,7 @@ export default async function ({store, redirect, app}) {
         // console.log('verifyUser.js 9 ' + JSON.stringify(result.data));
         if (result.data.status === false) {         
           store.dispatch('loginModule/logOut', result.data);
-          // redirect('/logout');
+          redirect('/login');
         }
         else {
           //this.modal('Başarılı', result.data.message);
@@ -24,7 +24,7 @@ export default async function ({store, redirect, app}) {
       });
   }
   else {
-    redirect('/logout');
+    redirect('/login');
   }
 
 

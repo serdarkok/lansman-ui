@@ -42,8 +42,9 @@ const actions = {
     },
 
     logOut({ commit }, data) {
-      data.auth = null;
-      data.token = '';
+      console.log('logout action çalıştı');
+      data.auth = false;
+      data.token = null;
       commit('changeToken', data);
     },
 }
@@ -54,13 +55,13 @@ const mutations = {
         state.modal.message = data.message;
     },
     changeToken(state, data) {
+      console.log('changeToken içerisindeki: ' + JSON.stringify(data));
       state.user.token = data.token;
-      state.user.auth = data.status;
+      state.user.auth = data.auth;
     }
 }
 
 const getters = {
-
 }
 
 export default {
