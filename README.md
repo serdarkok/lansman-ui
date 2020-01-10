@@ -1,6 +1,6 @@
 # lansman-ui
 
-> My geometric Nuxt.js project
+> This app created by NuxtJS.
 
 ## Build Setup
 
