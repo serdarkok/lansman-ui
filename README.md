@@ -1,6 +1,12 @@
-# lansman-ui
+# nuxt-client
 
 > This app created by NuxtJS.
+
+You can connect to api. Please look at nuxt.config.js
+
+    > '/api/login/' : 'http://localhost:3001',
+    > '/api/verifyToken/' : 'http://localhost:3001',
+    
 
 ## Build Setup
 
